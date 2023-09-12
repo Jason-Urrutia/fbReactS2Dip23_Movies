@@ -6,81 +6,82 @@ import Button from "react-bootstrap/Button"
 import {useState, useEffect} from 'react'
 
 export function Signup ( props ) {
-    const [username,setUsername] = useState('')
-    const [validusername,setValidusername] = useState(false)
-    const [useremail,setUseremail] = useState('')
-    const [validemail,setValidemail] = useState('')
-    const [validpassword,setValidpassword] = useState('')
-    const [userpassword,setUserpassword] = useState('')
+  const[username,setUsername] = useState('')
+  const[validusername,setValidusername] = useState(false)
+  const[useremail,setUseremail] = useState('')
+  const[validemail,setValidemail] = useState(false)
+  const[userpassword,setUserpassword] = useState('')
+  const[validpassword,setValidpassword] = useState(false)
 
-    const submitHandler = (evt) => {
-        evt.preventDefault()
-        props.handler( useremail, userpassword )
+  const submitHandler = (evt) => {
+    evt.preventDefault()
+    props.handler( useremail, userpassword )
+  }
+
+  useEffect( () => {
+    if( username.length >= 4 ) {
+      setValidusername(true)
     }
+    else {
+      setValidusername(false)
+    }
+  }, [username] )
 
-    useEffect( () => {
-        if( username.length >= 4 ) {
-            setValidusername(true)
-        }
-        else {
-            setValidusername(false)
-        }
-    }, [username] )
+  useEffect( () => {
+    if( useremail.indexOf('@') > 0 ) {
+      setValidemail(true)
+    }
+    else {
+      setValidemail(false)
+    }
+  }, [useremail])
 
-    useEffect( () => {
-        if( useremail.indexOf('@') > 0 ) {
-        }
-            else {
-                setValidemail(false)
-        }
-    }, [useremail])
+  useEffect( () => {
+    if( userpassword.length >= 8 ) {
+      setValidpassword(true)
+    }
+    else{
+      setValidpassword(false)
+    }
+  }, [userpassword])
 
-    useEffect( () => {
-        if( userpassword.length >= 8 ) {
-            setValidpassword(true)
-        }
-        else {
-            setValidpassword(false)
-        }
-    }, [userpassword] )
-
-    return ( 
-        <Container>
-            <Row>
-                <Col md={{span: 4, offset: 4,}}>
-                    <Form onSubmit={submitHandler}>
-                        <Form.Group>
-                            <Form.Label>Username</Form.Label>
-                            <Form.Control 
-                            type="text" 
-                            name="username" 
-                            placeholder="username"
-                            onChange={ (evt) => setUsername(evt.target.value) }
-                            />
-                       </Form.Group>
-                       <Form.Group>
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control 
-                        type="email" 
-                        name="email" 
-                        placeholder="you@example.com"
-                        onChange={ (evt) => setUseremail(evt.target.value) }
-                        />
-                    </Form.Group>
-                       <Form.Group>
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control 
-                        type="password" 
-                        name="password" 
-                        placeholder="minimum 8 characters"
-                        onChange={(evt) => setUserpassword(evt.target.value) }
-                        />
-                       </Form.Group>
-                       <Button 
-                       variant="primary" 
-                       className="mt-3 w-100" 
-                       type="submit"
-                       disabled={ (validemail && validpassword && validusername) ? false : true }
+  return ( 
+    <Container>
+      <Row>
+        <Col md={ {span: 4, offset: 4} }>
+          <Form onSubmit={submitHandler} >
+            <Form.Group>
+              <Form.Label>Username</Form.Label>
+              <Form.Control 
+                type="text" 
+                name="username" 
+                placeholder="username" 
+                onChange={ (evt) => setUsername(evt.target.value) }
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Email</Form.Label>
+              <Form.Control 
+                type="email" 
+                name="email" 
+                placeholder="you@example.com" 
+                onChange={ (evt) => setUseremail(evt.target.value) }
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Password</Form.Label>
+              <Form.Control 
+                type="password" 
+                name="password" 
+                placeholder="minimum 8 characters" 
+                onChange={(evt) => setUserpassword(evt.target.value) }
+              />
+            </Form.Group>
+            <Button 
+              variant="primary" 
+              className="mt-3 w-100" 
+              type="submit"
+              disabled={ (validemail && validpassword && validusername) ? false : true }
                        >
                         Sign up
                         </Button>
