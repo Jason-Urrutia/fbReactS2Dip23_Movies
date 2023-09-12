@@ -7,11 +7,19 @@ export function Signup ( props ) {
     return ( 
         <Container>
             <Row>
-                <Col>
+                <Col md={{span: 4, offset: 4,}}>
                     <Form>
                         <Form.Group>
                             <Form.Label>Username</Form.Label>
-                            <Form.Control name="text" placeholder="username" />
+                            <Form.Control type="text" name="username" placeholder="username" />
+                       </Form.Group>
+                       <Form.Group>
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control type="email" name="email" placeholder="you@example.com" />
+                       </Form.Group>
+                       <Form.Group>
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control type="password" name="password" placeholder="minimum 8 characters" />
                        </Form.Group>
                     </Form>
                 </Col>
