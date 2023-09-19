@@ -37,6 +37,7 @@ function App() {
   // application states
   const [ nav, setNav ] = useState( NavItems )
   const [ auth, setAuth ] = useState(false)
+  
   // authentication observer
   onAuthStateChanged( FBauth, ( user ) => {
     if( user ) {
