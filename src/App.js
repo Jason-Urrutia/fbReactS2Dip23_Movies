@@ -1,6 +1,6 @@
 import {FirebaseConfig} from "./config/Config"
 import {initializeApp} from "firebase/app"
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
 import { Routes, Route } from "react-router-dom"
 import { useState } from "react"
 
@@ -14,6 +14,19 @@ import{ Signup } from"./pages/Signup"
 function App() {
   const FBapp = initializeApp(FirebaseConfig)
   const FBauth = getAuth()
+  const [ auth, setAuth ] = useState(false)
+  // authentication observer
+  onAuthStateChanged( FBauth, ( user ) => {
+    if( user ) {
+      // currently authenticated
+      setAuth( user )
+      console.log( user )
+    }
+    else {
+      // currrently unauthenticated
+      setAuth( false )
+    }
+  })
 
   // navigation array
   const NavItems = [
