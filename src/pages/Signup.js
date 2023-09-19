@@ -29,7 +29,7 @@ useEffect( () => {
     // go to home
     navigate("/")
   }
-})
+}, [auth])
  
   useEffect( () => {
     if( username.length >= 4 ) {
