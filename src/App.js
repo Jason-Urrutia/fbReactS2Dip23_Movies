@@ -1,6 +1,7 @@
 import {FirebaseConfig} from "./config/Config"
 import {initializeApp} from "firebase/app"
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, 
+signInWithEmailAndPassword } from "firebase/auth"
 import { Routes, Route } from "react-router-dom"
 import { useState } from "react"
 
@@ -10,24 +11,13 @@ import { About } from "./pages/About"
 import { Home } from "./pages/Home"
 import { Contact } from "./pages/Contact"
 import{ Signup } from"./pages/Signup"
+import { Signout } from"./pages/Signout"
+import { Signin } from"./pages/Signin"
 
 function App() {
   const FBapp = initializeApp(FirebaseConfig)
   const FBauth = getAuth()
-  const [ auth, setAuth ] = useState(false)
-  // authentication observer
-  onAuthStateChanged( FBauth, ( user ) => {
-    if( user ) {
-      // currently authenticated
-      setAuth( user )
-      console.log( user )
-    }
-    else {
-      // currrently unauthenticated
-      setAuth( false )
-    }
-  })
-
+ 
   // navigation array
   const NavItems = [
     { label: "Home", link: "/" },
@@ -45,7 +35,21 @@ function App() {
   ]
 
   // application states
-  const [ nav, satNav ] = useState( NavItems )
+  const [ nav, setNav ] = useState( NavItems )
+  const [ auth, setAuth ] = useState(false)
+  // authentication observer
+  onAuthStateChanged( FBauth, ( user ) => {
+    if( user ) {
+      // currently authenticated
+      setAuth( user )
+      setNav( AuthNavItems )
+    }
+    else {
+      // currrently unauthenticated
+      setAuth( false )
+      setNav( NavItems )
+    }
+  })
 
   const saySomething = ( word ) => {
     alert( word )
@@ -59,6 +63,20 @@ function App() {
     .catch( (error) => console.log(error.message) )
   }
 
+const logOut = () => {
+  signOut(FBauth).then ( () => {
+  // user is signed out
+  })
+}
+
+const signIn = ( email, password ) => {
+  signInWithEmailAndPassword( FBauth, email, password )
+  .then( () => {
+    // user is signed in
+  })
+  .catch( (error) => { console.log(error) })
+}
+
   return (
     <div className="App">
       <Header items={nav} />
@@ -67,6 +85,8 @@ function App() {
         <Route path="/about" element={ <About greeting="Hey you, this is about page!" handler={saySomething} /> } />
         <Route path="/contact" element={ <Contact /> } />
         <Route path="/signup" element={ <Signup handler={signUp}/> } />
+        <Route path="/signout" element={ <Signout handler={logOut}/> } />
+        <Route path="/signin" element={ <Signin handler={signIn}/> } />
       </Routes>
     </div>
   );
