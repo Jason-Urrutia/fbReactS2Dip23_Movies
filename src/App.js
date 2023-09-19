@@ -87,7 +87,7 @@ const signIn = ( email, password ) => {
         <Route path="/contact" element={ <Contact /> } />
         <Route path="/signup" element={ <Signup handler={signUp}/> } />
         <Route path="/signout" element={ <Signout handler={logOut}/> } />
-        <Route path="/signin" element={ <Signin handler={signIn}/> } />
+        <Route path="/signin" element={ <Signin handler={signIn} authstate={auth} /> } />
       </Routes>
     </div>
   );
