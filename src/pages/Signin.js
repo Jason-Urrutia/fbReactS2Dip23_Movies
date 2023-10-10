@@ -48,8 +48,18 @@ const submitHandler = (evt) => {
         }
     })
     .catch( (code) => {
-        console.log(code)
-        setErrorCode( code )
+        //console.log(code)
+        //setErrorCode( code )
+        switch(code) {
+            case "auth/invalid-email" :
+            setErrorCode("the email address is invalid")
+            break
+            case "auth/invalid-login-credentials" :
+                setErrorCode("credentials supplied is not in our system")
+                break
+                default:
+                    break
+        }
     })
 }
 
