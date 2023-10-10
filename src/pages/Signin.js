@@ -57,8 +57,11 @@ const submitHandler = (evt) => {
             case "auth/invalid-login-credentials" :
                 setErrorCode("credentials supplied is not in our system")
                 break
+            case "auth/user-not-found" :
+                setErrorCode("credentials supplied is not in our system")
+                break
                 default:
-                    break
+                break
         }
     })
 }
