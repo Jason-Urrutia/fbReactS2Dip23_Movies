@@ -12,6 +12,7 @@ export function Signin( props ) {
     const [validemail, setValidemail] = useState(false)
     const [password,setPassword] = useState('')
     const [validpassword, setValidpassword] = useState(false)
+    const [errorCode, setErrorCode] = useState()
     const navigate = useNavigate()
 
     useEffect( () => {
@@ -41,6 +42,15 @@ export function Signin( props ) {
 const submitHandler = (evt) => {
     evt.preventDefault()
     props.handler( email, password )
+    .then((response) => {
+        if( response ) {
+          // sign in successful
+        }
+    })
+    .catch( (code) => {
+        console.log(code)
+        setErrorCode( code )
+    })
 }
 
     return(
@@ -76,6 +86,7 @@ const submitHandler = (evt) => {
                                      >
                         Sign in
                         </Button>
+                        <Form.Text>{errorCode}</Form.Text>
                     </Form>
                 </Col>
             </Row>
