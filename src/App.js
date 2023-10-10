@@ -74,12 +74,18 @@ const logOut = () => {
 }
 
 const signIn = ( email, password ) => {
-  signInWithEmailAndPassword( FBauth, email, password )
+  return new Promise( (resolve,reject) => {
+    signInWithEmailAndPassword( FBauth, email, password )
   .then( () => {
     // user is signed in
+    resolve(true)
   })
-  .catch( (error) => { console.log(error) })
-}
+  .catch( (error) => { 
+    console.log(error)
+    reject( error.code )
+   })
+  })
+ }
 
   return (
     <div className="App">
