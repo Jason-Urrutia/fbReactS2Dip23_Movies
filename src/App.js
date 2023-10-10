@@ -2,6 +2,7 @@ import {FirebaseConfig} from "./config/Config"
 import {initializeApp} from "firebase/app"
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, 
 signInWithEmailAndPassword } from "firebase/auth"
+import { getFirestore } from "firebase/firestore"
 import { Routes, Route } from "react-router-dom"
 import { useState } from "react"
 
@@ -20,6 +21,7 @@ import { AuthContext } from "./contexts/AuthContext"
 function App() {
   const FBapp = initializeApp(FirebaseConfig)
   const FBauth = getAuth()
+  const FBdb = getFirestore()
  
   // navigation array
   const NavItems = [
@@ -33,8 +35,7 @@ function App() {
     const AuthNavItems = [
     { label: "Home", link: "/" },
     { label: "About", link: "/about" },
-    { label: "Contact", link: "/contact" },
-    { label: "Log out", link: "/signout"}
+    { label: "Contact", link: "/contact" }
   ]
 
   // application states
@@ -89,7 +90,7 @@ const signIn = ( email, password ) => {
 
   return (
     <div className="App">
-      <Header items={nav} />
+      <Header items={nav} user={auth} />
       <AuthContext.Provider value={auth}>
       <Routes>
         <Route path="/" element={ <Home greeting="Hey you're at home!" /> } />
