@@ -22,15 +22,15 @@ export function Signup ( props ) {
     props.handler( useremail, userpassword )
   }
 
-const navigate = useNavigate()
+  const navigate = useNavigate()
 
-useEffect( () => {
-  if( auth ) {
-    // go to home
-    navigate("/")
-  }
-}, [auth])
- 
+  useEffect( () => {
+    if( auth ) {
+      // go to home
+      navigate("/")
+    }
+  }, [auth])
+
   useEffect( () => {
     if( username.length >= 4 ) {
       setValidusername(true)
@@ -95,12 +95,12 @@ useEffect( () => {
               className="mt-3 w-100" 
               type="submit"
               disabled={ (validemail && validpassword && validusername) ? false : true }
-                       >
-                        Sign up
-                        </Button>
-                    </Form>
-                </Col>
-            </Row>
-        </Container>
-    )
-  }
+            >
+              Sign up
+            </Button>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
+  )
+}
