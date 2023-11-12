@@ -3,7 +3,6 @@ import Navbar from "react-bootstrap/Navbar"
 import Nav from "react-bootstrap/Nav"
 import NavDropdown from "react-bootstrap/NavDropdown"
 
-
 export function Header(props) {
   // props.items is the value of nav state in App.js
   // create a collection of navigation items
@@ -13,11 +12,11 @@ export function Header(props) {
     )
   })
   // component for Account
-  const Account = () => {
+  const Account = ( props ) => {
     if (props.user) {
       return (
         <NavDropdown title={ props.user.email }>
-          <NavDropdown.Item href="/signout"> Log Out </NavDropdown.Item>
+          <NavDropdown.Item href="/signout">Log out</NavDropdown.Item>
         </NavDropdown>
       )
     }
@@ -32,10 +31,10 @@ export function Header(props) {
         <Navbar.Brand>App</Navbar.Brand>
         <Nav>
           {Links}
-          <Account user={ props.user} />
+          <Account user={ props.user } />
           {/* <NavDropdown title={props.user.email}>
-            <NavDropdown.Item href="/signout"> Log Out </NavDropdown.Item>
-        </NavDropdown> */}
+            <NavDropdown.Item href="/signout">Log out</NavDropdown.Item>
+          </NavDropdown> */}
         </Nav>
       </Container>
     </Navbar>
