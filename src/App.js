@@ -114,7 +114,7 @@ function App() {
 
   // function to get data
   const readData = async () => {
-    const querySnapshot = await getDocs(collection(FBdb, "books"))
+    const querySnapshot = await getDocs(collection(FBdb, "movies"))
     let listdata = []
     querySnapshot.forEach((doc) => {
       let item = doc.data()
