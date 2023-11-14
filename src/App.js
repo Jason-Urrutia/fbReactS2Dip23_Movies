@@ -126,9 +126,9 @@ function App() {
     setData(listdata)
   }
   // function to get a single item
-  const getDocument = async ( itemId) => {
-    const docRef = doc( FBdb, "movies", itemId )
-    const docSnap = await getDoc( docRef )
+  const getDocument = async (itemId) => {
+    const docRef = doc(FBdb, "movies", itemId)
+    const docSnap = await getDoc(docRef)
     let movie = docSnap.data()
     movie.id = itemId
     return movie
@@ -151,6 +151,7 @@ function App() {
         </StorageContext.Provider>
       </AuthContext.Provider>
     </div>
+
   );
 }
 
