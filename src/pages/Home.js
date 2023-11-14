@@ -18,7 +18,7 @@ export function Home(props) {
 
   const ItemCards = movies.map( ( movie, itemkey ) => {
     return(
-      <Col md={4}>
+      <Col md={3}>
         <Card key={itemkey}>
           <ItemImage source={ movie.cover_image} />
           <Card.Body>
