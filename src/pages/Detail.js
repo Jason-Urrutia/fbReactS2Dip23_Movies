@@ -61,7 +61,7 @@ export function Detail(props) {
                                 </Form.Select>
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Title</Form.Label>
+                                <Form.Label>Review Title</Form.Label>
                                 <Form.Control type="text" placeholder="I love this movie" />
                             </Form.Group>
                             <Form.Group>
