@@ -27,10 +27,10 @@ export function Detail(props) {
                     </Col>
                 </Row>
                 <Row>
-                    <Col md={4}>
+                    <Col md={5}>
                         <ItemImage source={movieData.cover_image} />
                     </Col>
-                    <Col md={8}>
+                    <Col md={7}>
                         <h2>More Information</h2>
                         <h3>Storyline</h3>
                         <p>{movieData.storyline}</p>
