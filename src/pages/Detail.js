@@ -5,6 +5,7 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { ItemImage } from "../components/ItemImage"
 import { ReviewForm } from "../components/ReviewForm"
+import { Reviews } from "../components/Reviews"
 
 
 export function Detail(props) {
@@ -54,6 +55,11 @@ export function Detail(props) {
                     <Col>
                     <ReviewForm movietitle={movieData.title} movieId={movieData.id}/>
                     </Col>
+                </Row>
+                <Row>
+                <Col>
+                <Reviews movieId={movieData.id}/>
+                </Col>
                 </Row>
             </Container>
         )
