@@ -20,7 +20,10 @@ export function ReviewForm(props) {
                 <h3>Review {props.movietitle}</h3>
                 <Form.Group>
                     <Form.Label>Star Rating</Form.Label>
-                    <Form.Select name="star" value={star} onChange={(evt) => setStar(evt.target.value) }>
+                    <Form.Select name="star" 
+                    value={star} 
+                    onChange={(evt) => setStar(evt.target.value) }
+                    >
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -31,11 +34,23 @@ export function ReviewForm(props) {
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Review Title</Form.Label>
-                    <Form.Control type="text" placeholder="I love this movie" />
+                    <Form.Control 
+                    type="text" 
+                    placeholder="I love this movie" 
+                    name="title" 
+                    onChange={ (evt) => setTitle(evt.target.value) }
+                    />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Review</Form.Label>
-                    <Form.Control as="textarea" rows={4} cols={30} placeholder="I could not stop watching!" />
+                    <Form.Control 
+                    as="textarea" 
+                    rows={4} 
+                    cols={30} 
+                    placeholder="I could not stop watching!" 
+                    name="content" 
+                    onChange={ (evt) => setReview(evt.target.value) }
+                    />
                 </Form.Group>
                 <Button type="submit" variant="primary">Submit</Button>
             </Form>
