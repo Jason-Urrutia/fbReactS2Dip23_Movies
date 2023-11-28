@@ -2,21 +2,41 @@ import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 
 import { AuthContext } from "../contexts/AuthContext"
-import { useContext, useState } from "react"
+import { FSContext } from "../contexts/FSContext"
+import { useContext, useState, useEffect } from "react"
+
+import { collection, addDoc } from "firebase/firestore"
 
 export function ReviewForm(props) {
     const auth = useContext(AuthContext)
-    const [ star, setStar ] = useState(5)
-    const [title, setTitle ] = useState()
-    const [review, setReview] = useState()
+    const db = useContext(FSContext)
 
-    const submitHandler = (event) => {
+    const [ star, setStar ] = useState(5)
+    const [title, setTitle ] = useState('')
+    const [review, setReview] = useState('')
+    const [valid, setValid] = useState(false)
+
+    useEffect( () => {
+        if( title.length > 4 && review.length > 4 ) {
+            setValid( true )
+        }
+        else {
+            setValid ( false )
+        }
+    }, [star, title, review])
+
+
+    const submitHandler = async (event) => {
         event.preventDefault()
+        const userReview = {title: title, star: star, body: review }
+        const col = collection( db, `movies/${props.movieId}/reviews`)
+        const ref = await addDoc( col, userReview )
+        console.log( ref )
     }
 
     if( auth ) {
         return (
-            <Form onSubmit={submitHandler}>
+          <Form onSubmit={submitHandler} className="my-4">
                 <h3>Review {props.movietitle}</h3>
                 <Form.Group>
                     <Form.Label>Star Rating</Form.Label>
@@ -52,7 +72,14 @@ export function ReviewForm(props) {
                     onChange={ (evt) => setReview(evt.target.value) }
                     />
                 </Form.Group>
-                <Button type="submit" variant="primary">Submit</Button>
+                <Button 
+                type="submit" 
+                variant="primary"
+                className="mt-2"
+                disabled={ (valid) ? false: true }
+                >
+                Submit
+             </Button>
             </Form>
         )
     }
