@@ -28,7 +28,7 @@ export function Header(props) {
   return (
     <Navbar>
       <Container>
-        <Navbar.Brand>Top 12 Movie Picks</Navbar.Brand>
+        <Navbar.Brand>Jason's Top 12 Movie Picks</Navbar.Brand>
         <Nav>
           {Links}
           <Account user={ props.user } />
